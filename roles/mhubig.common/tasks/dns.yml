@@ -1,0 +1,24 @@
+---
+- name: be sure the hostname is set
+  hostname: name={{ inventory_hostname }}
+
+- name: be sure the hosts file is populated
+  template: src=hosts.j2 dest=/etc/hosts
+
+- name: be sure the resolvconf package available
+  apt: name=resolvconf state=present
+  when: mhubig_common_use_resolvconf
+
+- name: install resolvconf config file
+  template: src=resolvconf.j2 dest=/etc/resolvconf/resolv.conf.d/head
+  notify:
+    - reload resolvconf
+  when: mhubig_common_use_resolvconf
+
+- name: remove the resolvconf package
+  apt: name=resolvconf state=absent purge=yes
+  when: not mhubig_common_use_resolvconf
+
+- name: install resolv.conf config file
+  template: src=resolvconf.j2 dest=/etc/resolv.conf
+  when: not mhubig_common_use_resolvconf

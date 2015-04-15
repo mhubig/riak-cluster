@@ -1,0 +1,15 @@
+---
+- name: add a sources.list file
+  template: src=sources.j2 dest=/etc/apt/sources.list
+  register: sourceslist
+
+- name: update apt cache if we changed the sources.list file
+  apt: update_cache=yes
+  when: sourceslist.changed
+
+- name: be sure the apt cache is up-to-date (once a day)
+  apt: update_cache=yes cache_valid_time=86400
+
+- name: upgrade all packages
+  apt: upgrade=dist
+  when: mhubig_common_upgrade

@@ -1,0 +1,15 @@
+---
+- name: check for apparmor
+  stat: path=/etc/init.d/apparmor
+  register: apparmor
+
+- name: stop and disable apparmor
+  service: name=apparmor state=stopped enabled=no
+  when: mhubig_common_remove_apparmor and apparmor.stat.exists
+
+- name: uninstall apparmor
+  apt: name={{ item }} state=absent purge=yes
+  with_items:
+    - apparmor
+    - apparmor-utils
+  when: mhubig_common_remove_apparmor and apparmor.stat.exists

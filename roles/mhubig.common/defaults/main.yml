@@ -1,0 +1,15 @@
+---
+mhubig_common_upgrade: no
+mhubig_common_remove_apparmor: no
+mhubig_common_use_resolvconf: yes
+mhubig_common_domain: mhubig.de
+mhubig_common_swap_device: False
+
+mhubig_common_searches:
+  - mhubig.de
+
+mhubig_common_nameservers:
+  - 8.8.8.8
+  - 8.8.4.4
+  - 2001:4860:4860::8888
+  - 2001:4860:4860::8844
