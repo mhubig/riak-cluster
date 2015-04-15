@@ -1,0 +1,7 @@
+---
+  - name: get the instance id
+    command: curl -s http://169.254.169.254/latest/meta-data/instance-id
+    register: instance_id
+
+  - name: save the instance id
+    set_fact: mhubig_aws_instance_id={{ instance_id.stdout }}

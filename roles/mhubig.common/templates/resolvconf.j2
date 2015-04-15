@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+{% for nameserver in mhubig_common_nameservers %}
+nameserver {{ nameserver }}
+{% endfor %}
+{% if mhubig_common_domain is defined %}
+domain {{ mhubig_common_domain }}
+{% endif %}
+{% if mhubig_common_searchs is defined %}
+search {% for name in mhubig_common_searchs %}{{ name }} {% endfor %}
+{% endif %}

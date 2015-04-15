@@ -1,18 +1,9 @@
 ---
-mhubig_aws_region: eu-central-1
-mhubig_aws_route53_name: False
-mhubig_aws_route53_zone: False
-mhubig_aws_volume_id: False
-
-mhubig_aws_tags:
-    - Name: node1
-    - Group: riak-cluster
-
 mhubig_common_upgrade: no
 mhubig_common_remove_apparmor: no
 mhubig_common_use_resolvconf: yes
 mhubig_common_domain: mhubig.de
-mhubig_common_swap_device: /dev/xvdf
+mhubig_common_swap_device: False
 
 mhubig_common_searches:
   - mhubig.de

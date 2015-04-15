@@ -1,0 +1,11 @@
+---
+# ATTENTION: Sensitiv role formating, don't edit!
+- name: add tags to the instance
+  sudo: no
+  local_action: ec2_tag
+    resource="{{ mhubig_aws_instance_id }}"
+    region="{{ mhubig_aws_region }}"
+  args:
+    tags:
+      "{{ item }}"
+  with_items: "{{ mhubig_aws_tags }}"

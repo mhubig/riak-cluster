@@ -5,8 +5,8 @@ mhubig_aws_route53_zone: False
 mhubig_aws_volume_id: False
 
 mhubig_aws_tags:
-    - Name: node1
-    - Group: riak-cluster
+    - Name: client1
+    - Group: riak-clients
 
 mhubig_common_upgrade: no
 mhubig_common_remove_apparmor: no

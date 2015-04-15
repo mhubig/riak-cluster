@@ -1,0 +1,12 @@
+---
+- name: Add/Update route53 entry
+  sudo: no
+  local_action: route53
+    command=create
+    zone='{{ mhubig_aws_route53_zone }}'
+    record='{{ mhubig_aws_route53_name }}'
+    type=A
+    ttl=60
+    value='{{ ansible_ssh_host }}'
+    overwrite=yes
+  when: mhubig_aws_route53_name != False and mhubig_aws_route53_zone != False

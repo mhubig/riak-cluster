@@ -1,0 +1,9 @@
+---
+- name: Attach a data volume to the instance as /dev/xvdh
+  sudo: no
+  local_action: ec2_vol
+    instance='{{ mhubig_aws_instance_id }}'
+    id='{{ mhubig_aws_volume_id }}'
+    region='{{ mhubig_aws_region }}'
+    device_name='/dev/xvdh'
+  when: mhubig_aws_volume_id != False

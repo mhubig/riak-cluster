@@ -1,0 +1,9 @@
+---
+- name: restart ntp
+  service: name=ntp state=restarted
+
+- name: set the time
+  shell: ntpdate -u 0.ubuntu.pool.ntp.org
+
+- name: reload resolvconf
+  shell: resolvconf -u

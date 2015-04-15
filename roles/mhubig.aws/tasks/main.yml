@@ -1,0 +1,5 @@
+---
+- include: facts.yml tags=mhubig.aws.facts
+- include: route53.yml tags=mhubig.aws.route53
+- include: tags.yml tags=mhubig.aws.tags
+- include: volume.yml tags=mhubig.aws.volume

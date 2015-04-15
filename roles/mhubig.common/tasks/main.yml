@@ -1,0 +1,7 @@
+---
+- include: dns.yml tags=mhubig.common.dns
+- include: apt.yml tags=mhubig.common.apt
+- include: apparmor.yml tags=mhubig.common.apparmor
+- include: ntp.yml tags=mhubig.common.ntp
+- include: tools.yml tags=mhubig.common.tools
+- include: swap.yml tags=mhubig.common.swap

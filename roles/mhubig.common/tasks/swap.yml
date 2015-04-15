@@ -1,0 +1,15 @@
+---
+- name: write swap entry in fstab
+  mount: >
+    name=none src={{ mhubig_common_swap_device }} fstype=swap
+    opts=sw passno=0 dump=0 state=present
+  register: fstab
+  when: mhubig_common_swap_device != False
+
+- name: format the swap disk
+  command: mkswap {{ mhubig_common_swap_device }}
+  when: mhubig_common_swap_device != False and fstab.changed
+
+- name: activate the swap disk
+  command: swapon {{ mhubig_common_swap_device }}
+  when: mhubig_common_swap_device != False and fstab.changed
