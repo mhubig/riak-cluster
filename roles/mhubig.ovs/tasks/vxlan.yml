@@ -1,0 +1,40 @@
+---
+- name: load the openvswitch module
+  shell: modprobe openvswitch
+
+- name: create the external bridge
+  shell: ovs-vsctl add-br ovsbr0
+
+- name: add internal interface to external bridge
+  shell: ovs-vsctl add-port ovsbr0 tep0 -- set interface tep0 type=internal
+
+- name: configure internal interface
+  shell: ifconfig tep0 192.168.200.21 netmask 255.255.255.0
+
+- name: create the internal bridge
+  shell: ovs-vsctl add-br ovsbr2
+
+- name: create vxlan tunnel to node1
+  shell: >
+    ovs-vsctl add-port ovsbr2 vxlan0 -- set Interface vxlan0 type=vxlan
+    options:remote_ip={{ hostvars.node1.ansible_ssh_host }}
+  when: not inventory_hostname == "node1"
+
+- name: create vxlan tunnel to node2
+  shell: >
+    ovs-vsctl add-port ovsbr0 vxlan0 -- set Interface vxlan0 type=vxlan
+    options:remote_ip={{ hostvars.node2.ansible_ssh_host }}
+  when: not inventory_hostname == "node2"
+
+- name: create vxlan tunnel to node3
+  shell: >
+    ovs-vsctl add-port ovsbr0 vxlan0 -- set Interface vxlan0 type=vxlan
+    options:remote_ip={{ hostvars.node3.ansible_ssh_host }}
+  when: not inventory_hostname == "node3"
+
+- name: create vxlan tunnel to client1
+  shell: >
+    ovs-vsctl add-port ovsbr0 vxlan0 -- set Interface vxlan0 type=vxlan
+    options:remote_ip={{ hostvars.client1.ansible_ssh_host }}
+  when: not inventory_hostname == "client1"
+
