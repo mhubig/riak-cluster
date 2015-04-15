@@ -57,4 +57,3 @@ a resent version on ansible (>=1.8.2) and some aws credentials.
 00. Deploy the cluster.
     $ ansible-playbook -i inventories/testing play_aws-deploy-cluster.yml
 
-
