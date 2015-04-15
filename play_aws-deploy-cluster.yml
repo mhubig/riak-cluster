@@ -5,3 +5,9 @@
   roles:
     - { role: mhubig.aws, tags: [ 'mhubig.aws' ] }
 
+- name: apply the common server role
+  hosts: common
+  sudo: yes
+  roles:
+    - { role: mhubig.common, tags: [ 'mhubig.common' ] }
+
