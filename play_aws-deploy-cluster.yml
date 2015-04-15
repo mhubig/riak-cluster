@@ -17,3 +17,9 @@
   roles:
     - { role: mhubig.docker, tags: [ 'mhubig.docker' ] }
 
+- name: apply the ovs server role
+  hosts: ovs-nodes
+  sudo: yes
+  roles:
+    - { role: mhubig.ovs, tags: [ 'mhubig.ovs' ] }
+
