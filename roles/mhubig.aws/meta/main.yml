@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  author: Markus Hubig <mhubig@gmail.de>
+  description:
+  license: GPLv2
+  min_ansible_version: 1.2
+  dependencies: []

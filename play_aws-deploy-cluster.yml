@@ -1,0 +1,7 @@
+---
+- name: apply the aws server role
+  hosts: aws-nodes
+  sudo: yes
+  roles:
+    - { role: mhubig.aws, tags: [ 'mhubig.aws' ] }
+
