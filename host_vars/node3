@@ -1,0 +1,4 @@
+---
+mhubig_aws_tags:
+    - Name: node3
+    - Group: riak-cluster

@@ -1,0 +1,4 @@
+---
+mhubig_aws_tags:
+    - Name: node1
+    - Group: riak-cluster
