@@ -4,19 +4,24 @@ node2   ansible_ssh_host=52.28.62.43 ansible_ssh_user=ubuntu
 node3   ansible_ssh_host=52.28.62.44 ansible_ssh_user=ubuntu
 client1 ansible_ssh_host=52.28.61.89 ansible_ssh_user=ubuntu
 
-[common]
-node1
-node2
-node3
-client1
-
 [aws-nodes]
 node1
 node2
 node3
 client1
 
-# OpenVSwitch Nodes
+[common]
+node1
+node2
+node3
+client1
+
+[docker]
+node1
+node2
+node3
+client1
+
 [ovs-nodes]
 node1
 node2

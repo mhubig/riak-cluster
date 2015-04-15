@@ -11,3 +11,9 @@
   roles:
     - { role: mhubig.common, tags: [ 'mhubig.common' ] }
 
+- name: apply the docker server role
+  hosts: docker
+  sudo: yes
+  roles:
+    - { role: mhubig.docker, tags: [ 'mhubig.docker' ] }
+
