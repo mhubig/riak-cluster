@@ -29,4 +29,28 @@ $ export AWS_SECRET_ACCESS_KEY="YYYYYYYYYYYYY"
 
 ```bash
 $ ansible-playbook -i inventories/testing play_aws-create-infrastructur.yml
+$ ansible-playbook -i inventories/testing play_aws-create-nodes.yml \
+  --extra-vars group=riak-nodes --extra-vars number=3
+...
+-> "msg": "52.28.61.5"
+...
+-> "msg": "52.28.62.43"
+...
+-> "msg": "52.28.62.44"
 ```
+
+```bash
+$ ansible-playbook -i inventories/testing play_aws-create-nodes.yml \
+  --extra-vars group=riak-clients --extra-vars number=1
+...
+-> "msg": "52.28.61.89"
+```
+
+```bash
+$ cat inventories/testing
+node1   ansible_ssh_host=52.28.61.5  ansible_ssh_user=ubuntu
+node2   ansible_ssh_host=52.28.62.43 ansible_ssh_user=ubuntu
+node3   ansible_ssh_host=52.28.62.44 ansible_ssh_user=ubuntu
+client  ansible_ssh_host=52.28.61.89 ansible_ssh_user=ubuntu
+...
+```bash

@@ -1,8 +1,8 @@
 # All Hosts
-node1   ansible_ssh_host=0.0.0.1 ansible_ssh_user=ubuntu
-node2   ansible_ssh_host=0.0.0.2 ansible_ssh_user=ubuntu
-node3   ansible_ssh_host=0.0.0.3 ansible_ssh_user=ubuntu
-client  ansible_ssh_host=0.0.0.4 ansible_ssh_user=ubuntu
+node1   ansible_ssh_host=52.28.61.5  ansible_ssh_user=ubuntu
+node2   ansible_ssh_host=52.28.62.43 ansible_ssh_user=ubuntu
+node3   ansible_ssh_host=52.28.62.44 ansible_ssh_user=ubuntu
+client  ansible_ssh_host=52.28.61.89 ansible_ssh_user=ubuntu
 
 [common]
 node1
