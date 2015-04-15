@@ -22,7 +22,7 @@
       local_action:
         module: ec2_group
         region: "{{ region }}"
-        name: riak-nodes
+        name: riak-clients
         description: Security Group for the RIAK-Cients
         rules:
           - proto: tcp
