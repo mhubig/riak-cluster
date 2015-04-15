@@ -2,26 +2,26 @@
 node1   ansible_ssh_host=52.28.61.5  ansible_ssh_user=ubuntu
 node2   ansible_ssh_host=52.28.62.43 ansible_ssh_user=ubuntu
 node3   ansible_ssh_host=52.28.62.44 ansible_ssh_user=ubuntu
-client  ansible_ssh_host=52.28.61.89 ansible_ssh_user=ubuntu
+client1 ansible_ssh_host=52.28.61.89 ansible_ssh_user=ubuntu
 
 [common]
 node1
 node2
 node3
-client
+client1
 
 [aws-nodes]
 node1
 node2
 node3
-client
+client1
 
 # OpenVSwitch Nodes
 [ovs-nodes]
 node1
 node2
 node3
-client
+client1
 
 # RIAK Cluster Nodes
 [riak-cluster]
@@ -31,7 +31,7 @@ node3
 
 # RIAK Client Nodes
 [riak-clients]
-client
+client1
 
 # Localhost Entry
 [localhost]

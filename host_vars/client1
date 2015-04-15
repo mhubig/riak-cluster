@@ -1,0 +1,4 @@
+---
+mhubig_aws_tags:
+    - Name: client1
+    - Group: riak-clients
