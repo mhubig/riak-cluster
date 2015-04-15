@@ -1,0 +1,57 @@
+---
+- name: creating the infrastructur for the riak cluster
+  hosts: localhost
+  gather_facts: False
+
+  vars:
+    keyname: admin@mhubig.de
+    keyfile: ~/.ssh/id_rsa.pub
+    region: eu-central-1 # Frankfurt
+    zone: eu-central-1a
+
+  tasks:
+    - name: creating a new ec2 key pair
+      local_action:
+        module: ec2_key
+        region: "{{ region }}"
+        name: "{{ keyname }}"
+        key_material: "{{ item }}"
+      with_file: "{{ keyfile }}"
+
+    - name: create a security group for the RIAK Clients
+      local_action:
+        module: ec2_group
+        region: "{{ region }}"
+        name: riak-nodes
+        description: Security Group for the RIAK-Cients
+        rules:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+        rules_egress:
+          - proto: all
+            cidr_ip: 0.0.0.0/0
+
+    - name: create a security group for the RIAK-Cluster Nodes
+      local_action:
+        module: ec2_group
+        region: "{{ region }}"
+        name: riak-nodes
+        description: Security Group for the RIAK-Cluster Nodes
+        rules:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+        rules_egress:
+          - proto: all
+            cidr_ip: 0.0.0.0/0
