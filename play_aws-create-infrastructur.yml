@@ -25,13 +25,7 @@
         name: riak-clients
         description: Security Group for the RIAK-Cients
         rules:
-          - proto: tcp
-            from_port: 80
-            to_port: 80
-            cidr_ip: 0.0.0.0/0
-          - proto: tcp
-            from_port: 22
-            to_port: 22
+          - proto: all
             cidr_ip: 0.0.0.0/0
         rules_egress:
           - proto: all
@@ -44,13 +38,7 @@
         name: riak-nodes
         description: Security Group for the RIAK-Cluster Nodes
         rules:
-          - proto: tcp
-            from_port: 80
-            to_port: 80
-            cidr_ip: 0.0.0.0/0
-          - proto: tcp
-            from_port: 22
-            to_port: 22
+          - proto: all
             cidr_ip: 0.0.0.0/0
         rules_egress:
           - proto: all
