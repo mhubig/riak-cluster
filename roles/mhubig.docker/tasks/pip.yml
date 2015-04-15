@@ -1,0 +1,14 @@
+---
+- name: check if pip is installed
+  stat: path=/usr/local/bin/pip
+  register: pip
+
+- name: download get-pip.py
+  get_url: >
+    url=https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+    dest=/tmp/get-pip.py mode=0640
+  when: pip.stat.exists == False
+
+- name: install pip
+  shell: python /tmp/get-pip.py
+  when: pip.stat.exists == False

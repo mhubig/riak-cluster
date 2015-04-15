@@ -1,0 +1,15 @@
+---
+- name: install nativ dependencies of docker-compose
+  apt: name={{ item }} update_cache=yes cache_valid_time=3600
+  with_items:
+    - libyaml-dev
+    - python-dev
+
+- name: install docker-compose
+  pip: name='https://github.com/docker/fig/zipball/master' state=latest
+
+- name: remove the not yet working version of requests
+  pip: name=requests state=absent
+
+- name: reinstall required requests version
+  pip: name=requests version=2.5.3
