@@ -1,0 +1,38 @@
+# All Hosts
+node1   ansible_ssh_host=0.0.0.1 ansible_ssh_user=ubuntu
+node2   ansible_ssh_host=0.0.0.2 ansible_ssh_user=ubuntu
+node3   ansible_ssh_host=0.0.0.3 ansible_ssh_user=ubuntu
+client  ansible_ssh_host=0.0.0.4 ansible_ssh_user=ubuntu
+
+[common]
+node1
+node2
+node3
+client
+
+[aws-nodes]
+node1
+node2
+node3
+client
+
+# OpenVSwitch Nodes
+[ovs-nodes]
+node1
+node2
+node3
+client
+
+# RIAK Cluster Nodes
+[riak-cluster]
+node1
+node2
+node3
+
+# RIAK Client Nodes
+[riak-clients]
+client
+
+# Localhost Entry
+[localhost]
+localhost ansible_python_interpreter=python
