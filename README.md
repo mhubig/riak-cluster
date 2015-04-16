@@ -5,7 +5,7 @@ provisioning a.k.a Infrastructure as Code. At the basic level, one can write sim
 files and Ansible will run them sequentially via SSH. (by reinteractive.net)
 
 ```bash
-This is Version 0.2.1 of the RIAK Cluster Infrastructure.
+This is Version 0.2.2 of the RIAK Cluster Infrastructure.
 
 - Omne initium difficile est.
   Ovid (43 v. Chr. - 17 n. Chr.)
