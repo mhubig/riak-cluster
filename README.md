@@ -82,7 +82,7 @@ $ export AWS_SECRET_ACCESS_KEY="YYYYYYYYYYYYY"
     node1   ansible_ssh_host=52.28.61.5  ansible_ssh_user=ubuntu
     node2   ansible_ssh_host=52.28.62.43 ansible_ssh_user=ubuntu
     node3   ansible_ssh_host=52.28.62.44 ansible_ssh_user=ubuntu
-    client1  ansible_ssh_host=52.28.61.89 ansible_ssh_user=ubuntu
+    client1 ansible_ssh_host=52.28.61.89 ansible_ssh_user=ubuntu
     ...
     ```
 
