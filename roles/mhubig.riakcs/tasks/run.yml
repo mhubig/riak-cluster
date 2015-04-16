@@ -1,0 +1,35 @@
+---
+- name: run riak cs seeding container on first node
+  docker:
+    image: hectcastro/riak-cs
+    name: riak-cs
+    hostname: riak-cs
+    state: running
+    restart_policy: always
+    net: none
+    ports:
+      - "2222:22"
+      - "8080:8080"
+      - "8098:8098"
+    env:
+      DOCKER_RIAK_CS_AUTOMATIC_CLUSTERING: 1
+      DOCKER_RIAK_CS_CLUSTER_SIZE: 3
+  when: inventory_hostname == "node1"
+
+- name: run riak cs container
+  docker:
+    image: hectcastro/riak-cs
+    name: riak-cs
+    hostname: riak-cs
+    state: running
+    restart_policy: always
+    net: none
+    ports:
+      - "2222:22"
+      - "8080:8080"
+      - "8098:8098"
+    env:
+      DOCKER_RIAK_CS_AUTOMATIC_CLUSTERING: 1
+      DOCKER_RIAK_CS_CLUSTER_SIZE: 3
+      SEED_PORT_8080_TCP_ADDR: 1.0.0.1:8080
+      when: not inventory_hostname == "node1"

@@ -11,3 +11,21 @@
   roles:
     - { role: mhubig.common, tags: [ 'mhubig.common' ] }
 
+- name: apply the docker server role
+  hosts: docker
+  sudo: yes
+  roles:
+    - { role: mhubig.docker, tags: [ 'mhubig.docker' ] }
+
+- name: apply the ovs server role
+  hosts: ovs-nodes
+  sudo: yes
+  roles:
+    - { role: mhubig.ovs, tags: [ 'mhubig.ovs' ] }
+
+- name: apply the riak-cs server role
+  hosts: riak-nodes
+  sudo: yes
+  roles:
+    - { role: mhubig.riakcs, tags: [ 'mhubig.riakcs' ] }
+

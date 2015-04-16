@@ -1,0 +1,3 @@
+---
+- include: install.yml tags=mhubig.ovs.install
+- include: vxlan.yml tags=mhubig.ovs.vxlan

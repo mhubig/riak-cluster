@@ -22,3 +22,8 @@ mhubig_common_nameservers:
   - 8.8.4.4
   - 2001:4860:4860::8888
   - 2001:4860:4860::8844
+
+mhubig_docker_storage_device: /dev/xvdg
+
+mhubig_ovs_version: 2.3.1
+mhubig_ovs_internal_ip: 192.168.200.20

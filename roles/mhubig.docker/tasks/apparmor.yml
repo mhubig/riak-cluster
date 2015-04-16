@@ -1,0 +1,19 @@
+---
+
+- name: enshure apparmor is installed
+  apt: name={{ item }} state=present
+  with_items:
+    - apparmor
+    - apparmor-utils
+
+- name: enshure apparmor is enabled and running
+  service: name=apparmor state=started enabled=yes
+
+- name: set complain mode for the docker profile
+  shell: aa-complain /etc/apparmor.d/docker
+
+- name: ensure docker profile stays in complain mode
+  file: >
+    src=/etc/apparmor.d/docker
+    dest=/etc/apparmor.d/force-complain/docker
+    state=link

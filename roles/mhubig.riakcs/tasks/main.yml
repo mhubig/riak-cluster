@@ -1,0 +1,3 @@
+---
+- include: run.yml tags=mhubig.riakcs.run
+- include: net.yml tags=mhubig.riakcs.net

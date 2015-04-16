@@ -1,0 +1,48 @@
+---
+- name: install btrfs-tools
+  apt: name=btrfs-tools update_cache=yes cache_valid_time=3600
+  when: mhubig_docker_storage_device != False
+
+- name: unmount the ephemeral storage device
+  mount: >
+    name=/mnt src={{ mhubig_docker_storage_device }}
+    fstype=ext4 state=unmounted
+  register: ephemeral
+  when: mhubig_docker_storage_device != False
+
+- name: remove ephemeral storage from fstab
+  mount: >
+    name=/mnt src={{ mhubig_docker_storage_device }}
+    fstype=ext4 state=absent
+  when: ephemeral.changed and mhubig_docker_storage_device != False
+
+- name: reformat storage device with btrfs
+  filesystem: fstype=btrfs dev={{ mhubig_docker_storage_device }} force=yes
+  when: mhubig_docker_storage_device != False and ephemeral.changed
+
+- name: format storage device with btrfs
+  filesystem: fstype=btrfs dev={{ mhubig_docker_storage_device }}
+  when: mhubig_docker_storage_device != False
+
+- name: check if docker_storage_device is already mounted
+  shell: mount | grep '/var/lib/docker'
+  register: docker_storage_mounted
+  ignore_errors: true
+
+- name: stop docker deamon
+  service: name=docker state=stopped
+  when: mhubig_docker_storage_device != False and docker_storage_mounted|failed
+  ignore_errors: true
+
+- name: mount docker storage to /var/lib/docker
+  mount: >
+    name=/var/lib/docker
+    src={{ mhubig_docker_storage_device }}
+    fstype=btrfs state=mounted
+  register: docker_mount
+  when: mhubig_docker_storage_device != False and docker_storage_mounted|failed
+
+- name: start docker deamon
+  service: name=docker state=started
+  when: mhubig_docker_storage_device != False and docker_storage_mounted|failed
+  ignore_errors: true

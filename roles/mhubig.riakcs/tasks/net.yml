@@ -1,0 +1,12 @@
+---
+- name: add container to network on node1
+  shell: ovswork.sh ovsbr2 $(sudo docker inspect --format={% raw %}"{{ .Id }}"{% endraw %} riak-cs) 1.0.0.1/24 1.0.0.255 1.0.0.254 10
+  when: inventory_hostname == "node1"
+
+- name: add container to network on node2
+  shell: ovswork.sh ovsbr2 $(sudo docker inspect --format={% raw %}"{{ .Id }}"{% endraw %} riak-cs) 1.0.0.2/24 1.0.0.255 1.0.0.254 10
+  when: inventory_hostname == "node2"
+
+- name: add container to network on node3
+  shell: ovswork.sh ovsbr2 $(sudo docker inspect --format={% raw %}"{{ .Id }}"{% endraw %} riak-cs) 1.0.0.3/24 1.0.0.255 1.0.0.254 10
+  when: inventory_hostname == "node3"

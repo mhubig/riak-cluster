@@ -1,0 +1,22 @@
+---
+- name: add repo key
+  apt_key: >
+    keyserver=keyserver.ubuntu.com
+    id=36A1D7869245C8950F966E92D8576A8BA88D21E9
+
+- name: add repo url
+  apt_repository: >
+    repo='deb https://get.docker.io/ubuntu docker main' state=present
+    update_cache=yes
+
+- name: install docker package
+  apt: name=lxc-docker state=present
+  register: docker_install
+
+- name: restart docker
+  #service: name=docker state=restarted
+  shell: service docker restart
+  when: docker_install.changed
+
+- name: ensure docker is enabled and running
+  service: name=docker enabled=yes state=running

@@ -1,0 +1,59 @@
+---
+- name: install the openvswitch dependencies
+  apt: name={{ item }} state=present
+  with_items:
+    - build-essential
+    - fakeroot
+    - debhelper
+    - autoconf
+    - automake
+    - libssl-dev
+    - bzip2
+    - openssl
+    - graphviz
+    - python-all
+    - procps
+    - python-qt4
+    - python-zopeinterface
+    - python-twisted-conch
+    - libtool
+    - dkms
+
+- name: Download the openvswitch source package
+  get_url: >
+    url=http://openvswitch.org/releases/openvswitch-{{ mhubig_ovs_version }}.tar.gz
+    dest=/tmp/openvswitch-{{ mhubig_ovs_version }}.tar.gz mode=0440
+
+- name: Unpack the openvswitch source package
+  unarchive: >
+    src=/tmp/openvswitch-{{ mhubig_ovs_version }}.tar.gz dest=/tmp copy=no
+
+- name: Check if the openvswitch package is already compiled
+  stat: path=/tmp/openvswitch-switch_2.3.1-1_amd64.deb
+  register: package
+
+- name: Check if all dependencies are installed
+  shell: >
+    dpkg-checkbuilddeps chdir=/tmp/openvswitch-{{ mhubig_ovs_version }}
+  register: checkbuilddeps
+  changed_when: checkbuilddeps.rc != 0
+  when: not package.stat.exists
+
+- name: Compile the openvswitch packages
+  shell: >
+    DEB_BUILD_OPTIONS='nocheck' fakeroot debian/rules binary
+    chdir=/tmp/openvswitch-{{ mhubig_ovs_version }}
+  when: not package.stat.exists
+
+- name: install the packages
+  shell: dpkg -i "{{ item }}" chdir=/tmp
+  with_items:
+    - openvswitch-common_2.3.1-1_amd64.deb
+    - openvswitch-switch_2.3.1-1_amd64.deb
+    - openvswitch-pki_2.3.1-1_all.deb
+    - openvswitch-datapath-dkms_2.3.1-1_all.deb
+  when: not package.stat.exists
+
+- name: copy the ovswork script over
+  copy: src=ovswork.sh dest=/usr/local/bin mode=0755
+

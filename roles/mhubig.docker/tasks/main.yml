@@ -1,0 +1,6 @@
+---
+- include: storage.yml tags=mhubig.docker.storage
+- include: docker.yml tags=mhubig.docker.docker
+- include: apparmor.yml tags=mhubig.docker.apparmor
+- include: pip.yml tags=mhubig.docker.pip
+- include: docker-compose.yml tags=mhubig.docker.docker-compose
