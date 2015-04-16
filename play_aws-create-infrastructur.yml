@@ -25,21 +25,27 @@
         name: riak-clients
         description: Security Group for the RIAK-Cients
         rules:
-          - proto: all
-            cidr_ip: 0.0.0.0/0
+           - proto: tcp
+             from_port: 22
+             to_port: 22
+             cidr_ip: 0.0.0.0/0
         rules_egress:
           - proto: all
             cidr_ip: 0.0.0.0/0
 
-    - name: create a security group for the RIAK-Cluster Nodes
+    - name: create a security group for the RIAK-Nodes
       local_action:
         module: ec2_group
         region: "{{ region }}"
         name: riak-nodes
-        description: Security Group for the RIAK-Cluster Nodes
+        description: Security Group for the RIAK-Nodes
         rules:
-          - proto: all
+          - proto: tcp
+            from_port: 22
+            to_port: 22
             cidr_ip: 0.0.0.0/0
+          - proto: all
+            group_name: riak-nodes
         rules_egress:
           - proto: all
             cidr_ip: 0.0.0.0/0
