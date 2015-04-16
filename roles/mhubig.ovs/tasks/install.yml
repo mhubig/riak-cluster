@@ -52,3 +52,8 @@
     - openvswitch-switch_2.3.1-1_amd64.deb
     - openvswitch-pki_2.3.1-1_all.deb
     - openvswitch-datapath-dkms_2.3.1-1_all.deb
+  when: not package.stat.exists
+
+- name: copy the ovswork script over
+  copy: src=ovswork.sh dest=/usr/local/bin mode=0755
+

@@ -10,7 +10,7 @@ VLANTAG=$6
 
 [ "$IPADDR" ] || {
     echo "Syntax:"
-    echo "pipework <hostinterface> <guest> <ipaddr>/<subnet> <broadcast> <gateway> [vlan tag]"
+    echo "osvwork.sh <hostinterface> <guest> <ipaddr>/<subnet> <broadcast> <gateway> [vlan tag]"
     exit 1
 }
 
