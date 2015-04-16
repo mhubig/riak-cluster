@@ -23,3 +23,9 @@
   roles:
     - { role: mhubig.ovs, tags: [ 'mhubig.ovs' ] }
 
+- name: apply the riak-cs server role
+  hosts: riak-nodes
+  sudo: yes
+  roles:
+    - { role: mhubig.riakcs, tags: [ 'mhubig.riakcs' ] }
+
